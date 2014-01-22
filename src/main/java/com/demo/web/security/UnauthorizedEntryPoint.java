@@ -1,4 +1,4 @@
-package com.demo.web.rest;
+package com.demo.web.security;
 
 import java.io.IOException;
 

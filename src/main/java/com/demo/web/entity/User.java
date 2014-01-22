@@ -1,8 +1,6 @@
 package com.demo.web.entity;
 
 import com.mysema.query.annotations.QueryEntity;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,14 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 @QueryEntity
 @Entity
 @Table(name = "USERS")
-public class User extends BusinessEntity implements UserDetails {
+public class User extends BusinessEntity {
 
     @Column(unique = true, length = 16, nullable = false)
     private String name;
@@ -30,9 +24,7 @@ public class User extends BusinessEntity implements UserDetails {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles = new HashSet<String>();
 
-    protected User() {
-
-        /* Reflection instantiation */
+    public User() {
     }
 
     public User(String name, String passwordHash) {
@@ -66,7 +58,6 @@ public class User extends BusinessEntity implements UserDetails {
         this.roles.add(role);
     }
 
-    @Override
     public String getPassword() {
 
         return this.password;
@@ -76,52 +67,4 @@ public class User extends BusinessEntity implements UserDetails {
 
         this.password = password;
     }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        Set<String> userRoles = this.getRoles();
-
-        if (userRoles == null) {
-            return Collections.emptyList();
-        }
-
-        Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-        for (String role : userRoles) {
-            authorities.add(new SimpleGrantedAuthority(role));
-        }
-
-        return authorities;
-    }
-
-    @Override
-    public String getUsername() {
-
-        return this.name;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-
-        return true;
-    }
-
 }

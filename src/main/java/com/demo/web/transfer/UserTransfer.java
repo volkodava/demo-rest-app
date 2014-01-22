@@ -39,6 +39,6 @@ public class UserTransfer {
 
     @Override
     public String toString() {
-        return "UserTransfer{" + "name=" + name + ", roles=" + roles + ", token=" + token + '}';
+        return name + " [roles=" + roles + ", token=" + token + ']';
     }
 }

@@ -2,6 +2,7 @@ package com.demo.web.entity;
 
 import com.mysema.query.annotations.QuerySupertype;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,32 +29,33 @@ public class BusinessEntity implements Serializable {
         return id;
     }
 
-    /* 
-     * (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object obj) {
-
-        if (this == obj) {
-            return true;
-        }
-
-        if (this.id == null || obj == null || !(this.getClass().equals(obj.getClass()))) {
-            return false;
-        }
-
-        BusinessEntity that = (BusinessEntity) obj;
-
-        return this.id.equals(that.getId());
-    }
-
-    /* 
+    /*
      * (non-Javadoc)
      * @see java.lang.Object#hashCode()
      */
     @Override
     public int hashCode() {
-        return id == null ? 0 : id.hashCode();
+        int hash = 5;
+        hash = 17 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final BusinessEntity other = (BusinessEntity) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 }

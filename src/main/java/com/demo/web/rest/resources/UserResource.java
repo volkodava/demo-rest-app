@@ -1,6 +1,6 @@
 package com.demo.web.rest.resources;
 
-import com.demo.web.repository.UserRepository;
+import com.demo.web.security.AuthenticationUserDetailsService;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +10,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.demo.web.rest.TokenUtils;
 import com.demo.web.transfer.UserTransfer;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -31,14 +30,11 @@ import org.springframework.stereotype.Service;
 public class UserResource {
 
     @Autowired(required = true)
-    private UserRepository userRepository;
+    private AuthenticationUserDetailsService userDetailsService;
 
     @Autowired(required = true)
     @Qualifier("authenticationManager")
     private AuthenticationManager authManager;
-
-    @Autowired(required = true)
-    private TokenUtils tokenUtils;
 
     @Path("authenticate")
     @POST
@@ -64,13 +60,13 @@ public class UserResource {
          * Reload user as password of authentication principal will be null after authorization and
          * password is needed for token generation
          */
-        UserDetails userDetails = userRepository.loadUserByUsername(username);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
         for (GrantedAuthority authority : userDetails.getAuthorities()) {
             roles.put(authority.toString(), Boolean.TRUE);
         }
 
-        String token = tokenUtils.createToken(userDetails);
+        String token = userDetailsService.createToken(userDetails);
         UserTransfer userTransfer = new UserTransfer(userDetails.getUsername(), roles, token);
 
         Response response = Response.status(Response.Status.OK).entity(userTransfer).build();

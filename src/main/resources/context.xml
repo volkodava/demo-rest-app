@@ -76,7 +76,7 @@
     
     <security:authentication-manager id="authenticationManager">
         <security:authentication-provider
-            user-service-ref="userRepository">
+            user-service-ref="authenticationUserDetailsService">
             <security:password-encoder ref="passwordEncoder"></security:password-encoder>
         </security:authentication-provider>
     </security:authentication-manager>

@@ -1,6 +1,5 @@
-package com.demo.web.rest;
+package com.demo.web.security;
 
-import com.demo.web.repository.UserRepository;
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
@@ -21,10 +20,7 @@ import org.springframework.web.filter.GenericFilterBean;
 public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
 
     @Autowired(required = true)
-    private UserRepository userRepository;
-
-    @Autowired(required = true)
-    private TokenUtils tokenUtils;
+    private AuthenticationUserDetailsService userDetailsService;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
@@ -37,11 +33,11 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String authToken = httpRequest.getHeader("X-Auth-Token");
 
-        String userName = tokenUtils.getUserNameFromToken(authToken);
+        String userName = userDetailsService.getUserNameFromToken(authToken);
 
         if (userName != null) {
-            UserDetails userDetails = userRepository.loadUserByUsername(userName);
-            if (tokenUtils.validateToken(authToken, userDetails)) {
+            UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+            if (userDetailsService.validateToken(authToken, userDetails)) {
                 UsernamePasswordAuthenticationToken authentication
                     = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails((HttpServletRequest) request));

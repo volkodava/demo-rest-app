@@ -1,20 +1,46 @@
-package com.demo.web.rest;
+package com.demo.web.security;
 
+import com.demo.web.entity.User;
+import com.demo.web.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class TokenUtils {
+@Service("authenticationUserDetailsService")
+public class AuthenticationUserDetailsService implements UserDetailsService {
 
     private static final String MAGIC_KEY = "MyMagicKey-right_here";
 
     @Autowired(required = true)
+    private UserRepository userRepository;
+
+    @Autowired(required = true)
     @Qualifier("passwordEncoder")
     private PasswordEncoder passwordEncoder;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) {
+
+        User user = userRepository.findUserByName(username);
+
+        if (user == null) {
+            return null;
+        }
+
+        org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(
+            username, user.getPassword(), getGrantedAuthorities(user));
+
+        return userDetails;
+    }
 
     public String createToken(UserDetails userDetails) {
 
@@ -70,8 +96,24 @@ public class TokenUtils {
         signatureBuilder.append(":");
         signatureBuilder.append(expires);
         signatureBuilder.append(":");
-        signatureBuilder.append(TokenUtils.MAGIC_KEY);
+        signatureBuilder.append(AuthenticationUserDetailsService.MAGIC_KEY);
 
         return signatureBuilder.toString();
+    }
+
+    private Collection<? extends GrantedAuthority> getGrantedAuthorities(User user) {
+
+        Set<String> roles = user.getRoles();
+
+        if (roles == null) {
+            return Collections.emptyList();
+        }
+
+        Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+        for (String role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role));
+        }
+
+        return authorities;
     }
 }
