@@ -1,4 +1,5 @@
 Running Demo REST application
+-----------------------------
 
 REST web application based on AngularJS, Bootstrap 3, Spring Security, Jersey, AspectJ, Hibernate, Spring Data JPA, Querydsl with unit and integration tests.
 UI has been taken from the project https://github.com/philipsorst/angular-rest-springsecurity
