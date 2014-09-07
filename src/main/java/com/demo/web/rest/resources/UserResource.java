@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,6 +30,12 @@ import org.springframework.stereotype.Service;
 @Service
 @Path("/user")
 public class UserResource {
+
+    @Value("${facebook.apiKey}")
+    private String apiKey;
+
+    @Value("${facebook.apiSecret}")
+    private String apiSecret;
 
     @Autowired(required = true)
     private AuthenticationUserDetailsService userDetailsService;
@@ -52,6 +59,13 @@ public class UserResource {
         userTransfer.setRoles(roles);
 
         return userTransfer;
+    }
+
+    @Path("fbAuth")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response authenticate() {
+        throw new UnsupportedOperationException();
     }
 
     @Path("authenticate")

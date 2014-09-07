@@ -21,6 +21,7 @@
     <context:annotation-config />
 
     <context:property-placeholder location="classpath:/db.properties" />
+    <context:property-placeholder location="classpath:/application.properties" />
 
     <!-- database setup -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
@@ -87,6 +88,8 @@
         <security:custom-filter ref="authenticationTokenProcessingFilter"
                                 position="FORM_LOGIN_FILTER" />
         <security:intercept-url pattern="/rest/user/authenticate"
+                                access="permitAll" />
+        <security:intercept-url pattern="/rest/user/fbAuth"
                                 access="permitAll" />
         <security:intercept-url method="GET" pattern="/rest/news/**"
                                 access="hasRole('user')" />

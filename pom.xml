@@ -170,7 +170,7 @@
     </profiles>
 
     <dependencies>
-        
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
@@ -379,7 +379,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-    	
+        
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>

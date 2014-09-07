@@ -24975,3 +24975,139 @@ insert into USERS (id, name, password) values (null, ?, ?) [42102-181]
 2014-09-07 14:05:55 INFO  UserRepositoryTest:29 - Users: [com.demo.web.entity.User@56, com.demo.web.entity.User@57]
 2014-09-07 14:05:55 INFO  GenericApplicationContext:873 - Closing org.springframework.context.support.GenericApplicationContext@afc824e: startup date [Sun Sep 07 14:05:52 EEST 2014]; root of context hierarchy
 2014-09-07 14:05:55 INFO  LocalContainerEntityManagerFactoryBean:462 - Closing JPA EntityManagerFactory for persistence unit 'examplePU'
+2014-09-07 14:06:34 INFO  XmlBeanDefinitionReader:316 - Loading XML bean definitions from class path resource [context.xml]
+2014-09-07 14:06:35 INFO  SpringSecurityCoreVersion:49 - You are running with Spring Security Core 3.2.0.RELEASE
+2014-09-07 14:06:35 INFO  SecurityNamespaceHandler:75 - Spring Security 'config' module version is 3.2.0.RELEASE
+2014-09-07 14:06:35 INFO  FilterInvocationSecurityMetadataSourceParser:134 - Creating access control expression attribute 'permitAll' for /rest/user/authenticate
+2014-09-07 14:06:35 INFO  FilterInvocationSecurityMetadataSourceParser:134 - Creating access control expression attribute 'hasRole('user')' for /rest/news/**
+2014-09-07 14:06:35 INFO  FilterInvocationSecurityMetadataSourceParser:134 - Creating access control expression attribute 'hasRole('admin')' for /rest/news/**
+2014-09-07 14:06:35 INFO  FilterInvocationSecurityMetadataSourceParser:134 - Creating access control expression attribute 'hasRole('admin')' for /rest/news/**
+2014-09-07 14:06:35 INFO  FilterInvocationSecurityMetadataSourceParser:134 - Creating access control expression attribute 'hasRole('admin')' for /rest/news/**
+2014-09-07 14:06:35 INFO  HttpSecurityBeanDefinitionParser:266 - Checking sorted filter chain: [Root bean: class [org.springframework.security.web.context.SecurityContextPersistenceFilter]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 200, <authenticationTokenProcessingFilter>, order = 1100, Root bean: class [org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 1700, Root bean: class [org.springframework.security.web.authentication.AnonymousAuthenticationFilter]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 2000, Root bean: class [org.springframework.security.web.access.ExceptionTranslationFilter]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 2200, <org.springframework.security.web.access.intercept.FilterSecurityInterceptor#0>, order = 2300]
+2014-09-07 14:06:35 INFO  GenericApplicationContext:513 - Refreshing org.springframework.context.support.GenericApplicationContext@afc824e: startup date [Sun Sep 07 14:06:35 EEST 2014]; root of context hierarchy
+2014-09-07 14:06:35 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from class path resource [db.properties]
+2014-09-07 14:06:35 INFO  MLog:80 - MLog clients using log4j logging.
+2014-09-07 14:06:35 INFO  C3P0Registry:204 - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+2014-09-07 14:06:35 INFO  LocalContainerEntityManagerFactoryBean:314 - Building JPA container EntityManagerFactory for persistence unit 'examplePU'
+2014-09-07 14:06:35 WARN  HibernatePersistence:58 - HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-09-07 14:06:35 INFO  LogHelper:46 - HHH000204: Processing PersistenceUnitInfo [
+	name: examplePU
+	...]
+2014-09-07 14:06:35 INFO  Version:54 - HHH000412: Hibernate Core {4.3.0.Final}
+2014-09-07 14:06:35 INFO  Environment:224 - HHH000205: Loaded properties from resource hibernate.properties: {hibernate.dialect=org.hibernate.dialect.H2Dialect, hibernate.show_sql=true, hibernate.bytecode.use_reflection_optimizer=false, hibernate.format_sql=true, hibernate.hbm2ddl.auto=update}
+2014-09-07 14:06:35 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2014-09-07 14:06:35 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-09-07 14:06:35 INFO  AbstractPoolBackedDataSource:462 - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge15x94m51gto1wsf5vk|65a8d7fd, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> org.h2.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge15x94m51gto1wsf5vk|65a8d7fd, idleConnectionTestPeriod -> 60, initialPoolSize -> 3, jdbcUrl -> jdbc:h2:mem:test;DB_CLOSE_DELAY=-1, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 50, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2014-09-07 14:06:36 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2014-09-07 14:06:36 INFO  LobCreatorBuilder:123 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-09-07 14:06:36 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2014-09-07 14:06:36 INFO  SchemaUpdate:182 - HHH000228: Running hbm2ddl schema update
+2014-09-07 14:06:36 INFO  SchemaUpdate:193 - HHH000102: Fetching database metadata
+2014-09-07 14:06:36 INFO  SchemaUpdate:205 - HHH000396: Updating schema
+2014-09-07 14:06:36 INFO  DatabaseMetaData:147 - HHH000262: Table not found: NEWS
+2014-09-07 14:06:36 INFO  DatabaseMetaData:147 - HHH000262: Table not found: USERS
+2014-09-07 14:06:36 INFO  DatabaseMetaData:147 - HHH000262: Table not found: User_roles
+2014-09-07 14:06:36 INFO  DatabaseMetaData:147 - HHH000262: Table not found: NEWS
+2014-09-07 14:06:36 INFO  DatabaseMetaData:147 - HHH000262: Table not found: USERS
+2014-09-07 14:06:36 INFO  DatabaseMetaData:147 - HHH000262: Table not found: User_roles
+2014-09-07 14:06:36 INFO  DatabaseMetaData:147 - HHH000262: Table not found: NEWS
+2014-09-07 14:06:36 INFO  DatabaseMetaData:147 - HHH000262: Table not found: USERS
+2014-09-07 14:06:36 INFO  DatabaseMetaData:147 - HHH000262: Table not found: User_roles
+2014-09-07 14:06:36 INFO  SchemaUpdate:242 - HHH000232: Schema update complete
+2014-09-07 14:06:37 INFO  DefaultSecurityFilterChain:28 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.SecurityContextPersistenceFilter@56b26df, com.demo.web.security.AuthenticationTokenProcessingFilter@3dc4fd40, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4fce946e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@372eab1, org.springframework.security.web.access.ExceptionTranslationFilter@6d8e0c3b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@8c52dae]
+2014-09-07 14:06:37 INFO  NewsEntryRepositoryTest:29 - News: [NewsEntry{date=2014-09-06, content=This is example content 0}, NewsEntry{date=2014-09-06, content=This is example content 1}, NewsEntry{date=2014-09-06, content=This is example content 2}, NewsEntry{date=2014-09-06, content=This is example content 3}, NewsEntry{date=2014-09-06, content=This is example content 4}, NewsEntry{date=2014-09-06, content=This is example content 5}, NewsEntry{date=2014-09-06, content=This is example content 6}, NewsEntry{date=2014-09-06, content=This is example content 7}, NewsEntry{date=2014-09-06, content=This is example content 8}, NewsEntry{date=2014-09-06, content=This is example content 9}]
+2014-09-07 14:06:37 INFO  GooGooStatementCache:441 - Multiply prepared statement! select roles0_.User_id as User_id1_1_0_, roles0_.roles as roles2_2_0_ from User_roles roles0_ where roles0_.User_id=?
+2014-09-07 14:06:37 INFO  UserRepositoryTest:29 - Users: [com.demo.web.entity.User@56, com.demo.web.entity.User@57]
+2014-09-07 14:06:37 INFO  GenericApplicationContext:873 - Closing org.springframework.context.support.GenericApplicationContext@afc824e: startup date [Sun Sep 07 14:06:35 EEST 2014]; root of context hierarchy
+2014-09-07 14:06:37 INFO  LocalContainerEntityManagerFactoryBean:462 - Closing JPA EntityManagerFactory for persistence unit 'examplePU'
+2014-09-07 17:11:50 INFO  XmlBeanDefinitionReader:316 - Loading XML bean definitions from class path resource [context.xml]
+2014-09-07 17:11:51 INFO  SpringSecurityCoreVersion:49 - You are running with Spring Security Core 3.2.0.RELEASE
+2014-09-07 17:11:51 INFO  SecurityNamespaceHandler:75 - Spring Security 'config' module version is 3.2.0.RELEASE
+2014-09-07 17:11:51 INFO  FilterInvocationSecurityMetadataSourceParser:134 - Creating access control expression attribute 'permitAll' for /rest/user/authenticate
+2014-09-07 17:11:51 INFO  FilterInvocationSecurityMetadataSourceParser:134 - Creating access control expression attribute 'hasRole('user')' for /rest/news/**
+2014-09-07 17:11:51 INFO  FilterInvocationSecurityMetadataSourceParser:134 - Creating access control expression attribute 'hasRole('admin')' for /rest/news/**
+2014-09-07 17:11:51 INFO  FilterInvocationSecurityMetadataSourceParser:134 - Creating access control expression attribute 'hasRole('admin')' for /rest/news/**
+2014-09-07 17:11:51 INFO  FilterInvocationSecurityMetadataSourceParser:134 - Creating access control expression attribute 'hasRole('admin')' for /rest/news/**
+2014-09-07 17:11:51 INFO  HttpSecurityBeanDefinitionParser:266 - Checking sorted filter chain: [Root bean: class [org.springframework.security.web.context.SecurityContextPersistenceFilter]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 200, <authenticationTokenProcessingFilter>, order = 1100, Root bean: class [org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 1700, Root bean: class [org.springframework.security.web.authentication.AnonymousAuthenticationFilter]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 2000, Root bean: class [org.springframework.security.web.access.ExceptionTranslationFilter]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 2200, <org.springframework.security.web.access.intercept.FilterSecurityInterceptor#0>, order = 2300]
+2014-09-07 17:11:51 INFO  GenericApplicationContext:513 - Refreshing org.springframework.context.support.GenericApplicationContext@afc824e: startup date [Sun Sep 07 17:11:51 EEST 2014]; root of context hierarchy
+2014-09-07 17:11:51 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from class path resource [db.properties]
+2014-09-07 17:11:51 INFO  MLog:80 - MLog clients using log4j logging.
+2014-09-07 17:11:51 INFO  C3P0Registry:204 - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+2014-09-07 17:11:51 INFO  LocalContainerEntityManagerFactoryBean:314 - Building JPA container EntityManagerFactory for persistence unit 'examplePU'
+2014-09-07 17:11:51 WARN  HibernatePersistence:58 - HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-09-07 17:11:51 INFO  LogHelper:46 - HHH000204: Processing PersistenceUnitInfo [
+	name: examplePU
+	...]
+2014-09-07 17:11:51 INFO  Version:54 - HHH000412: Hibernate Core {4.3.0.Final}
+2014-09-07 17:11:51 INFO  Environment:224 - HHH000205: Loaded properties from resource hibernate.properties: {hibernate.dialect=org.hibernate.dialect.H2Dialect, hibernate.show_sql=true, hibernate.bytecode.use_reflection_optimizer=false, hibernate.format_sql=true, hibernate.hbm2ddl.auto=update}
+2014-09-07 17:11:51 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2014-09-07 17:11:52 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-09-07 17:11:52 INFO  AbstractPoolBackedDataSource:462 - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge15x94mbnq432evkny|7699b6af, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> org.h2.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge15x94mbnq432evkny|7699b6af, idleConnectionTestPeriod -> 60, initialPoolSize -> 3, jdbcUrl -> jdbc:h2:mem:test;DB_CLOSE_DELAY=-1, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 50, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2014-09-07 17:11:52 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2014-09-07 17:11:52 INFO  LobCreatorBuilder:123 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-09-07 17:11:52 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2014-09-07 17:11:52 INFO  SchemaUpdate:182 - HHH000228: Running hbm2ddl schema update
+2014-09-07 17:11:52 INFO  SchemaUpdate:193 - HHH000102: Fetching database metadata
+2014-09-07 17:11:52 INFO  SchemaUpdate:205 - HHH000396: Updating schema
+2014-09-07 17:11:52 INFO  DatabaseMetaData:147 - HHH000262: Table not found: NEWS
+2014-09-07 17:11:52 INFO  DatabaseMetaData:147 - HHH000262: Table not found: USERS
+2014-09-07 17:11:52 INFO  DatabaseMetaData:147 - HHH000262: Table not found: User_roles
+2014-09-07 17:11:52 INFO  DatabaseMetaData:147 - HHH000262: Table not found: NEWS
+2014-09-07 17:11:52 INFO  DatabaseMetaData:147 - HHH000262: Table not found: USERS
+2014-09-07 17:11:52 INFO  DatabaseMetaData:147 - HHH000262: Table not found: User_roles
+2014-09-07 17:11:52 INFO  DatabaseMetaData:147 - HHH000262: Table not found: NEWS
+2014-09-07 17:11:52 INFO  DatabaseMetaData:147 - HHH000262: Table not found: USERS
+2014-09-07 17:11:52 INFO  DatabaseMetaData:147 - HHH000262: Table not found: User_roles
+2014-09-07 17:11:52 INFO  SchemaUpdate:242 - HHH000232: Schema update complete
+2014-09-07 17:11:53 INFO  DefaultSecurityFilterChain:28 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.SecurityContextPersistenceFilter@73fb47e7, com.demo.web.security.AuthenticationTokenProcessingFilter@762dca2d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@38348cf8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2130a9c, org.springframework.security.web.access.ExceptionTranslationFilter@301d88d4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@63022ef9]
+2014-09-07 17:11:53 INFO  NewsEntryRepositoryTest:29 - News: [NewsEntry{date=2014-09-06, content=This is example content 0}, NewsEntry{date=2014-09-06, content=This is example content 1}, NewsEntry{date=2014-09-06, content=This is example content 2}, NewsEntry{date=2014-09-06, content=This is example content 3}, NewsEntry{date=2014-09-06, content=This is example content 4}, NewsEntry{date=2014-09-06, content=This is example content 5}, NewsEntry{date=2014-09-06, content=This is example content 6}, NewsEntry{date=2014-09-07, content=This is example content 7}, NewsEntry{date=2014-09-07, content=This is example content 8}, NewsEntry{date=2014-09-07, content=This is example content 9}]
+2014-09-07 17:11:53 INFO  GooGooStatementCache:441 - Multiply prepared statement! select roles0_.User_id as User_id1_1_0_, roles0_.roles as roles2_2_0_ from User_roles roles0_ where roles0_.User_id=?
+2014-09-07 17:11:53 INFO  UserRepositoryTest:29 - Users: [com.demo.web.entity.User@56, com.demo.web.entity.User@57]
+2014-09-07 17:11:53 INFO  GenericApplicationContext:873 - Closing org.springframework.context.support.GenericApplicationContext@afc824e: startup date [Sun Sep 07 17:11:51 EEST 2014]; root of context hierarchy
+2014-09-07 17:11:53 INFO  LocalContainerEntityManagerFactoryBean:462 - Closing JPA EntityManagerFactory for persistence unit 'examplePU'
+2014-09-07 17:44:09 INFO  XmlBeanDefinitionReader:316 - Loading XML bean definitions from class path resource [context.xml]
+2014-09-07 17:44:10 INFO  SpringSecurityCoreVersion:49 - You are running with Spring Security Core 3.2.0.RELEASE
+2014-09-07 17:44:10 INFO  SecurityNamespaceHandler:75 - Spring Security 'config' module version is 3.2.0.RELEASE
+2014-09-07 17:44:10 INFO  FilterInvocationSecurityMetadataSourceParser:134 - Creating access control expression attribute 'permitAll' for /rest/user/authenticate
+2014-09-07 17:44:10 INFO  FilterInvocationSecurityMetadataSourceParser:134 - Creating access control expression attribute 'hasRole('user')' for /rest/news/**
+2014-09-07 17:44:10 INFO  FilterInvocationSecurityMetadataSourceParser:134 - Creating access control expression attribute 'hasRole('admin')' for /rest/news/**
+2014-09-07 17:44:10 INFO  FilterInvocationSecurityMetadataSourceParser:134 - Creating access control expression attribute 'hasRole('admin')' for /rest/news/**
+2014-09-07 17:44:10 INFO  FilterInvocationSecurityMetadataSourceParser:134 - Creating access control expression attribute 'hasRole('admin')' for /rest/news/**
+2014-09-07 17:44:10 INFO  HttpSecurityBeanDefinitionParser:266 - Checking sorted filter chain: [Root bean: class [org.springframework.security.web.context.SecurityContextPersistenceFilter]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 200, <authenticationTokenProcessingFilter>, order = 1100, Root bean: class [org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 1700, Root bean: class [org.springframework.security.web.authentication.AnonymousAuthenticationFilter]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 2000, Root bean: class [org.springframework.security.web.access.ExceptionTranslationFilter]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 2200, <org.springframework.security.web.access.intercept.FilterSecurityInterceptor#0>, order = 2300]
+2014-09-07 17:44:10 INFO  GenericApplicationContext:513 - Refreshing org.springframework.context.support.GenericApplicationContext@fbb5f5: startup date [Sun Sep 07 17:44:10 EEST 2014]; root of context hierarchy
+2014-09-07 17:44:10 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from class path resource [db.properties]
+2014-09-07 17:44:10 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from class path resource [app.properties]
+2014-09-07 17:44:10 INFO  MLog:80 - MLog clients using log4j logging.
+2014-09-07 17:44:10 INFO  C3P0Registry:204 - Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+2014-09-07 17:44:10 INFO  LocalContainerEntityManagerFactoryBean:314 - Building JPA container EntityManagerFactory for persistence unit 'examplePU'
+2014-09-07 17:44:10 WARN  HibernatePersistence:58 - HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-09-07 17:44:10 INFO  LogHelper:46 - HHH000204: Processing PersistenceUnitInfo [
+	name: examplePU
+	...]
+2014-09-07 17:44:10 INFO  Version:54 - HHH000412: Hibernate Core {4.3.0.Final}
+2014-09-07 17:44:10 INFO  Environment:224 - HHH000205: Loaded properties from resource hibernate.properties: {hibernate.dialect=org.hibernate.dialect.H2Dialect, hibernate.show_sql=true, hibernate.bytecode.use_reflection_optimizer=false, hibernate.format_sql=true, hibernate.hbm2ddl.auto=update}
+2014-09-07 17:44:10 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2014-09-07 17:44:10 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-09-07 17:44:10 INFO  AbstractPoolBackedDataSource:462 - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge15x94mcta2wi6fj9l|445889, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> org.h2.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge15x94mcta2wi6fj9l|445889, idleConnectionTestPeriod -> 60, initialPoolSize -> 3, jdbcUrl -> jdbc:h2:mem:test;DB_CLOSE_DELAY=-1, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 50, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2014-09-07 17:44:10 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2014-09-07 17:44:10 INFO  LobCreatorBuilder:123 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-09-07 17:44:11 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2014-09-07 17:44:11 INFO  SchemaUpdate:182 - HHH000228: Running hbm2ddl schema update
+2014-09-07 17:44:11 INFO  SchemaUpdate:193 - HHH000102: Fetching database metadata
+2014-09-07 17:44:11 INFO  SchemaUpdate:205 - HHH000396: Updating schema
+2014-09-07 17:44:11 INFO  DatabaseMetaData:147 - HHH000262: Table not found: NEWS
+2014-09-07 17:44:11 INFO  DatabaseMetaData:147 - HHH000262: Table not found: USERS
+2014-09-07 17:44:11 INFO  DatabaseMetaData:147 - HHH000262: Table not found: User_roles
+2014-09-07 17:44:11 INFO  DatabaseMetaData:147 - HHH000262: Table not found: NEWS
+2014-09-07 17:44:11 INFO  DatabaseMetaData:147 - HHH000262: Table not found: USERS
+2014-09-07 17:44:11 INFO  DatabaseMetaData:147 - HHH000262: Table not found: User_roles
+2014-09-07 17:44:11 INFO  DatabaseMetaData:147 - HHH000262: Table not found: NEWS
+2014-09-07 17:44:11 INFO  DatabaseMetaData:147 - HHH000262: Table not found: USERS
+2014-09-07 17:44:11 INFO  DatabaseMetaData:147 - HHH000262: Table not found: User_roles
+2014-09-07 17:44:11 INFO  SchemaUpdate:242 - HHH000232: Schema update complete
+2014-09-07 17:44:12 INFO  DefaultSecurityFilterChain:28 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.SecurityContextPersistenceFilter@1adb467, com.demo.web.security.AuthenticationTokenProcessingFilter@11ef2bf, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@d31191, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1264c24, org.springframework.security.web.access.ExceptionTranslationFilter@150e390, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@18c2576]
+2014-09-07 17:44:12 INFO  NewsEntryRepositoryTest:29 - News: [NewsEntry{date=2014-09-06, content=This is example content 0}, NewsEntry{date=2014-09-06, content=This is example content 1}, NewsEntry{date=2014-09-06, content=This is example content 2}, NewsEntry{date=2014-09-06, content=This is example content 3}, NewsEntry{date=2014-09-06, content=This is example content 4}, NewsEntry{date=2014-09-06, content=This is example content 5}, NewsEntry{date=2014-09-06, content=This is example content 6}, NewsEntry{date=2014-09-07, content=This is example content 7}, NewsEntry{date=2014-09-07, content=This is example content 8}, NewsEntry{date=2014-09-07, content=This is example content 9}]
+2014-09-07 17:44:12 INFO  GooGooStatementCache:441 - Multiply prepared statement! select roles0_.User_id as User_id1_1_0_, roles0_.roles as roles2_2_0_ from User_roles roles0_ where roles0_.User_id=?
+2014-09-07 17:44:12 INFO  UserRepositoryTest:29 - Users: [com.demo.web.entity.User@56, com.demo.web.entity.User@57]
+2014-09-07 17:44:12 INFO  GenericApplicationContext:873 - Closing org.springframework.context.support.GenericApplicationContext@fbb5f5: startup date [Sun Sep 07 17:44:10 EEST 2014]; root of context hierarchy
+2014-09-07 17:44:12 INFO  LocalContainerEntityManagerFactoryBean:462 - Closing JPA EntityManagerFactory for persistence unit 'examplePU'
