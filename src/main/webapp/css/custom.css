@@ -20,3 +20,7 @@ ng-hide {
     right: 0;
     margin: auto;
 }
+
+.social-button-row {
+    padding-top: 1.0em;
+}
