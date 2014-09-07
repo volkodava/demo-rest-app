@@ -7,13 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.demo.web.JsonViews;
-import com.mysema.query.annotations.QueryEntity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.codehaus.jackson.map.annotate.JsonView;
 
-@QueryEntity
 @Entity
 @Table(name = "NEWS")
 public class NewsEntry extends BusinessEntity {

@@ -1,61 +1,72 @@
 angular.module('demoapp', ['ngRoute', 'ngCookies', 'demoapp.services'])
-        .config(
-                ['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
+    .config(
+        ['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
 
-                        $routeProvider.when('/create', {
-                            templateUrl: 'partials/create.html',
-                            controller: CreateController
-                        });
+                $routeProvider.when('/create', {
+                    templateUrl: 'partials/create.html',
+                    controller: CreateController
+                });
 
-                        $routeProvider.when('/edit/:id', {
-                            templateUrl: 'partials/edit.html',
-                            controller: EditController
-                        });
+                $routeProvider.when('/edit/:id', {
+                    templateUrl: 'partials/edit.html',
+                    controller: EditController
+                });
 
-                        $routeProvider.when('/login', {
-                            templateUrl: 'partials/login.html',
-                            controller: LoginController
-                        });
+                $routeProvider.when('/login', {
+                    templateUrl: 'partials/login.html',
+                    controller: LoginController
+                });
 
-                        $routeProvider.otherwise({
-                            templateUrl: 'partials/index.html',
-                            controller: IndexController
-                        });
+                $routeProvider.otherwise({
+                    templateUrl: 'partials/index.html',
+                    controller: IndexController
+                });
 
-                        $locationProvider.hashPrefix('!');
+                $locationProvider.hashPrefix('!');
 
-                        /* Intercept http errors */
-                        var interceptor = function($rootScope, $q, $location) {
+                /* Register error provider that shows message on failed requests or redirects to login page on
+                 * unauthenticated requests */
+                $httpProvider.interceptors.push(function($q, $rootScope, $location) {
+                    return {
+                        'responseError': function(rejection) {
+                            var status = rejection.status;
+                            var config = rejection.config;
+                            var method = config.method;
+                            var url = config.url;
 
-                            function success(response) {
-                                return response;
+                            if (status === 401) {
+                                $location.path("/login");
+                                $rootScope.error = "The user name or password is incorrect. Verify your user name, and then type your password again.";
+                            } else {
+                                $rootScope.error = method + " on " + url + " failed with status " + status;
                             }
 
-                            function error(response) {
+                            return $q.reject(rejection);
+                        }
+                    };
+                });
 
-                                var status = response.status;
-                                var config = response.config;
-                                var method = config.method;
-                                var url = config.url;
-
-                                if (status === 401) {
-                                    $location.path("/login");
+                /* Registers auth token interceptor, auth token is either passed by header or by query parameter
+                 * as soon as there is an authenticated user */
+                $httpProvider.interceptors.push(function($q, $rootScope, $location) {
+                    return {
+                        'request': function(config) {
+                            var isRestCall = config.url.indexOf('rest') === 0;
+                            if (isRestCall && angular.isDefined($rootScope.authToken)) {
+                                var authToken = $rootScope.authToken;
+                                if (demoappConfig.useAuthTokenHeader) {
+                                    config.headers['X-Auth-Token'] = authToken;
                                 } else {
-                                    $rootScope.error = method + " on " + url + " failed with status " + status;
+                                    config.url = config.url + "?token=" + authToken;
                                 }
-
-                                return $q.reject(response);
                             }
+                            return config || $q.when(config);
+                        }
+                    };
+                });
+            }]
 
-                            return function(promise) {
-                                return promise.then(success, error);
-                            };
-                        };
-                        $httpProvider.responseInterceptors.push(interceptor);
-
-                    }]
-
-                ).run(function($rootScope, $http, $location, $cookieStore, LoginService) {
+        ).run(function($rootScope, $location, $cookieStore, UserService) {
 
     /* Reset error when a new view is loaded */
     $rootScope.$on('$viewContentLoaded', function() {
@@ -77,22 +88,24 @@ angular.module('demoapp', ['ngRoute', 'ngCookies', 'demoapp.services'])
 
     $rootScope.logout = function() {
         delete $rootScope.user;
-        delete $http.defaults.headers.common['X-Auth-Token'];
-        $cookieStore.remove('user');
+        delete $rootScope.authToken;
+        $cookieStore.remove('authToken');
         $location.path("/login");
     };
 
     /* Try getting valid user from cookie or go to login page */
     var originalPath = $location.path();
     $location.path("/login");
-    var user = $cookieStore.get('user');
-    if (user !== undefined) {
-        $rootScope.user = user;
-        $http.defaults.headers.common['X-Auth-Token'] = user.token;
-
-        $location.path(originalPath);
+    var authToken = $cookieStore.get('authToken');
+    if (authToken !== undefined) {
+        $rootScope.authToken = authToken;
+        UserService.get(function(user) {
+            $rootScope.user = user;
+            $location.path(originalPath);
+        });
     }
 
+    $rootScope.initialized = true;
 });
 
 function IndexController($scope, NewsService) {
@@ -128,30 +141,37 @@ function CreateController($scope, $location, NewsService) {
     };
 }
 
-function LoginController($scope, $rootScope, $location, $http, $cookieStore, LoginService) {
+function LoginController($scope, $rootScope, $location, $cookieStore, UserService) {
+
+    $scope.rememberMe = false;
 
     $scope.login = function() {
-        LoginService.authenticate($.param({username: $scope.username, password: $scope.password}), function(user) {
-            $rootScope.user = user;
-            $http.defaults.headers.common['X-Auth-Token'] = user.token;
-            $cookieStore.put('user', user);
-            $location.path("/");
+        UserService.authenticate($.param({username: $scope.username, password: $scope.password}), function(authenticationResult) {
+            var authToken = authenticationResult.token;
+            $rootScope.authToken = authToken;
+            if ($scope.rememberMe) {
+                $cookieStore.put('authToken', authToken);
+            }
+            UserService.get(function(user) {
+                $rootScope.user = user;
+                $location.path("/");
+            });
         });
     };
 }
 
 var services = angular.module('demoapp.services', ['ngResource']);
 
-services.factory('LoginService', function($resource) {
+services.factory('UserService', function($resource) {
 
     return $resource('rest/user/:action', {},
-            {
-                authenticate: {
-                    method: 'POST',
-                    params: {'action': 'authenticate'},
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                }
+        {
+            authenticate: {
+                method: 'POST',
+                params: {'action': 'authenticate'},
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }
+        }
     );
 });
 

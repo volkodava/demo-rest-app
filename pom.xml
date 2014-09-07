@@ -7,12 +7,13 @@
     <packaging>war</packaging>
 
     <properties>
-        <jdk.version>1.7</jdk.version>
         <app.context>demo-rest-app</app.context>
         <test.server.port>8080</test.server.port>
         
-        <show.deprecations>false</show.deprecations>
-        <show.showWarnings>true</show.showWarnings>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <compile.deprecations>false</compile.deprecations>
+        <compile.showWarnings>true</compile.showWarnings>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -26,7 +27,6 @@
         <c3p0.version>0.9.1.2</c3p0.version>
         <aspectjrt.version>1.7.4</aspectjrt.version>
         <spring-data-jpa.version>1.4.3.RELEASE</spring-data-jpa.version>
-        <querydsl.version>3.3.0</querydsl.version>
         
         <junit.version>4.11</junit.version>
         <mockito.version>1.9.5</mockito.version>
@@ -136,6 +136,7 @@
                                     <goal>integration-test</goal>
                                 </goals>
                                 <configuration>
+                                    <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
                                     <includes>
                                         <include>**/*IT*</include>
                                     </includes>
@@ -157,6 +158,7 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>${maven-surefire-plugin.version}</version>
                         <configuration>
+                            <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
                             <excludes>
                                 <exclude>**/*</exclude>
                             </excludes>
@@ -316,18 +318,6 @@
         </dependency>
         
         <dependency>
-            <groupId>com.mysema.querydsl</groupId>
-            <artifactId>querydsl-collections</artifactId>
-            <version>${querydsl.version}</version>
-        </dependency>
-	
-        <dependency>
-            <groupId>com.mysema.querydsl</groupId>
-            <artifactId>querydsl-core</artifactId>
-            <version>${querydsl.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-ehcache</artifactId>
             <version>${org.hibernate.version}</version>
@@ -441,11 +431,9 @@
                 <version>${maven-compiler-plugin.version}</version>
                 <inherited>true</inherited>
                 <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
                     <optimize>true</optimize>
-                    <showDeprecation>${show.deprecations}</showDeprecation>
-                    <showWarnings>${show.showWarnings}</showWarnings>
+                    <showDeprecation>${compile.deprecations}</showDeprecation>
+                    <showWarnings>${compile.showWarnings}</showWarnings>
                 </configuration>
             </plugin>
             <plugin>
@@ -519,42 +507,6 @@
                         <exclude>**/*IT*</exclude>
                     </excludes>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.mysema.maven</groupId>
-                <artifactId>apt-maven-plugin</artifactId>
-                <version>${apt-maven-plugin.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.mysema.querydsl</groupId>
-                        <artifactId>querydsl-apt</artifactId>
-                        <version>${querydsl.version}</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>JPAAnnotationProcessor</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
-                            <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>QuerydslAnnotationProcessor</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
-                            <processor>com.mysema.query.apt.QuerydslAnnotationProcessor</processor>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
         <pluginManagement>

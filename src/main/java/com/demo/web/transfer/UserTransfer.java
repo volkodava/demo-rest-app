@@ -15,26 +15,32 @@ public class UserTransfer {
     public UserTransfer() {
     }
 
-    public UserTransfer(String userName, Map<String, Boolean> roles, String token) {
-
+    public UserTransfer(String userName) {
         this.name = userName;
-        this.roles = roles;
-        this.token = token;
     }
 
     public String getName() {
+        return name;
+    }
 
-        return this.name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Map<String, Boolean> getRoles() {
+        return roles;
+    }
 
-        return this.roles;
+    public void setRoles(Map<String, Boolean> roles) {
+        this.roles = roles;
     }
 
     public String getToken() {
+        return token;
+    }
 
-        return this.token;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override

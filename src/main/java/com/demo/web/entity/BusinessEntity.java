@@ -1,6 +1,5 @@
 package com.demo.web.entity;
 
-import com.mysema.query.annotations.QuerySupertype;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.GeneratedValue;
@@ -12,7 +11,6 @@ import javax.persistence.MappedSuperclass;
  * Base class to derive entity classes from.
  *
  */
-@QuerySupertype
 @MappedSuperclass
 public class BusinessEntity implements Serializable {
 

@@ -1,6 +1,5 @@
 package com.demo.web.entity;
 
-import com.mysema.query.annotations.QueryEntity;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Table;
 
-@QueryEntity
 @Entity
 @Table(name = "USERS")
 public class User extends BusinessEntity {

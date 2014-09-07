@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.demo.web.transfer.UserTransfer;
+import javax.ws.rs.GET;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
@@ -36,6 +37,23 @@ public class UserResource {
     @Qualifier("authenticationManager")
     private AuthenticationManager authManager;
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public UserTransfer getUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        if (principal instanceof String && ((String) principal).equals("anonymousUser")) {
+            throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+        }
+        UserDetails userDetails = (UserDetails) principal;
+
+        Map<String, Boolean> roles = createRolesMap(userDetails);
+        UserTransfer userTransfer = new UserTransfer(userDetails.getUsername());
+        userTransfer.setRoles(roles);
+
+        return userTransfer;
+    }
+
     @Path("authenticate")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -54,23 +72,29 @@ public class UserResource {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        Map<String, Boolean> roles = new HashMap<String, Boolean>();
-
         /*
          * Reload user as password of authentication principal will be null after authorization and
          * password is needed for token generation
          */
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-        for (GrantedAuthority authority : userDetails.getAuthorities()) {
-            roles.put(authority.toString(), Boolean.TRUE);
-        }
-
+        Map<String, Boolean> roles = createRolesMap(userDetails);
         String token = userDetailsService.createToken(userDetails);
-        UserTransfer userTransfer = new UserTransfer(userDetails.getUsername(), roles, token);
+
+        UserTransfer userTransfer = new UserTransfer(userDetails.getUsername());
+        userTransfer.setRoles(roles);
+        userTransfer.setToken(token);
 
         Response response = Response.status(Response.Status.OK).entity(userTransfer).build();
         return response;
     }
 
+    private Map<String, Boolean> createRolesMap(UserDetails userDetails) {
+        Map<String, Boolean> roles = new HashMap<String, Boolean>();
+        for (GrantedAuthority authority : userDetails.getAuthorities()) {
+            roles.put(authority.getAuthority(), Boolean.TRUE);
+        }
+
+        return roles;
+    }
 }
